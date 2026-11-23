@@ -48,15 +48,55 @@ body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif;min-hei
 .cancel{background:#26344e;color:white}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){
-.sidebar{width:145px;padding:15px 9px}
-.brand{font-size:16px}.sub{font-size:9px}
-.nav button{font-size:12px;padding:10px 7px}
-.main{margin-left:145px;padding:13px}
-.top{display:block}.top h1{font-size:19px;margin-bottom:12px}
-.search{width:100%}.hero{padding:16px}.hero h2{font-size:17px}.hero p{font-size:12px}
-.grid{grid-template-columns:1fr;gap:10px}
-.card{padding:13px}.logo{font-size:30px}
-.categories button{padding:8px 10px;font-size:11px}
+.sidebar{
+position:static;
+width:100%;
+padding:14px;
+border-right:0;
+border-bottom:1px solid var(--border);
+}
+.brand{font-size:19px}
+.sub{font-size:11px;margin-bottom:12px}
+.nav{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+.nav button{
+width:auto;
+margin:0;
+padding:9px 11px;
+font-size:12px;
+}
+.main{
+margin-left:0;
+padding:14px;
+max-width:none;
+}
+.top{display:block}
+.top h1{
+font-size:21px;
+margin-bottom:12px;
+}
+.search{width:100%}
+.hero{padding:18px}
+.hero h2{font-size:18px}
+.hero p{font-size:12px}
+.grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
+}
+.card{padding:12px}
+.logo{font-size:28px}
+.card h3{font-size:14px}
+.card p{font-size:11px}
+.actions{gap:6px}
+.visit{padding:9px 5px;font-size:11px}
+.smallbtn{padding:8px}
+.categories button{
+padding:8px 10px;
+font-size:11px;
+}
 }
 </style>
 </head>
