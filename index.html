@@ -1,160 +1,523 @@
+here 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WebTools BD</title>
+<meta name="theme-color" content="#080f1e">
+<title>WebTools BD - Smart Dashboard</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#070e1c;--panel:#111b2e;--panel2:#17233a;--border:#26344e;--text:#eef4ff;--muted:#91a1bd;--blue:#3478ff;--purple:#792bdf}
-body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
-.sidebar{position:fixed;inset:0 auto 0 0;width:225px;background:#0c1426;border-right:1px solid var(--border);padding:22px 15px;z-index:5}
-.brand{font-size:20px;font-weight:bold;color:#55b7ff;margin-bottom:5px}
-.sub{font-size:11px;color:var(--muted);margin-bottom:25px}
-.nav button{width:100%;text-align:left;border:0;background:transparent;color:#aab9d2;padding:12px;border-radius:9px;margin:3px 0;cursor:pointer}
-.nav button.active,.nav button:hover{background:linear-gradient(100deg,#2563eb,#792bdf);color:white}
-.main{margin-left:225px;padding:25px;max-width:1500px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
-.top h1{font-size:23px}
-.search{width: min(360px,100%);padding:12px 14px;border:1px solid var(--border);background:var(--panel);border-radius:11px;color:white;outline:none}
-.hero{padding:23px;border-radius:17px;background:linear-gradient(110deg,#103c85,#46218c);margin-bottom:20px}
-.hero h2{font-size:21px;margin-bottom:8px}
-.hero p{color:#d5e2ff;font-size:14px}
-.categories{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.categories button{background:var(--panel);color:var(--muted);border:1px solid var(--border);padding:9px 14px;border-radius:22px;cursor:pointer}
-.categories button.active{background:#2866e9;color:white;border-color:#2866e9}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:17px;text-align:center;transition:.2s;min-width:0}
-.card:hover{transform:translateY(-3px);border-color:#5578ff}
-.logo{font-size:35px;margin:8px 0 12px}
-.card h3{font-size:15px;margin-bottom:5px;word-break:break-word}
-.card p{font-size:11px;color:var(--muted);margin-bottom:14px}
-.actions{display:flex;gap:8px}
-.visit{display:block;flex:1;background:linear-gradient(100deg,#2869ee,#8429df);color:white;text-decoration:none;border:0;padding:10px;border-radius:9px;font-weight:bold;font-size:12px}
-.smallbtn{border:1px solid var(--border);background:var(--panel2);color:white;padding:9px;border-radius:8px;cursor:pointer}
+
+:root{
+--bg:#080f1e;
+--panel:#111c30;
+--panel2:#192740;
+--border:#293954;
+--text:#f1f5ff;
+--muted:#91a2bd;
+--blue:#3478ff;
+--purple:#802de5;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+font-family:Arial,sans-serif;
+min-height:100vh;
+}
+
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.app{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:245px;
+flex-shrink:0;
+background:#0d1729;
+border-right:1px solid var(--border);
+padding:24px 16px;
+}
+
+.brand{
+font-size:22px;
+font-weight:bold;
+color:#59baff;
+margin-bottom:7px;
+}
+
+.sub{
+font-size:12px;
+color:var(--muted);
+margin-bottom:30px;
+}
+
+.nav{
+display:grid;
+gap:7px;
+}
+
+.nav button{
+width:100%;
+border:0;
+border-radius:10px;
+padding:13px;
+text-align:left;
+background:transparent;
+color:#b2bfd5;
+}
+
+.nav button.active,
+.nav button:hover,
+.addbtn{
+background:linear-gradient(110deg,#2869f0,#802de5);
+color:white;
+}
+
+.main{
+flex:1;
+min-width:0;
+max-width:1500px;
+padding:28px;
+}
+
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+margin-bottom:24px;
+}
+
+.top h1{font-size:25px}
+
+.search{
+width:min(380px,100%);
+padding:14px 16px;
+border:1px solid var(--border);
+border-radius:12px;
+background:var(--panel);
+color:white;
+outline:none;
+}
+
+.search:focus{
+border-color:var(--blue);
+}
+
+.hero{
+background:linear-gradient(115deg,#123d87,#51218f);
+padding:28px;
+border:1px solid #354a8c;
+border-radius:18px;
+margin-bottom:24px;
+}
+
+.hero h2{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#d6e2ff;
+line-height:1.6;
+}
+
+.section-title{
+font-size:17px;
+margin:22px 0 14px;
+}
+
+.categories{
+display:flex;
+flex-wrap:wrap;
+gap:9px;
+margin-bottom:22px;
+}
+
+.categories button{
+padding:10px 16px;
+border-radius:30px;
+border:1px solid var(--border);
+background:var(--panel);
+color:var(--muted);
+}
+
+.categories button.active{
+background:var(--blue);
+border-color:var(--blue);
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+}
+
+.card{
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:16px;
+padding:20px;
+text-align:center;
+min-width:0;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:#557eff;
+}
+
+.logo{
+font-size:38px;
+margin:8px 0 14px;
+}
+
+.card h3{
+font-size:16px;
+margin-bottom:7px;
+overflow-wrap:anywhere;
+}
+
+.card p{
+font-size:12px;
+color:var(--muted);
+margin-bottom:17px;
+}
+
+.actions{
+display:flex;
+gap:8px;
+}
+
+.visit{
+flex:1;
+display:block;
+padding:12px 6px;
+border-radius:9px;
+background:linear-gradient(100deg,#2869f0,#802de5);
+color:white;
+text-decoration:none;
+font-size:13px;
+font-weight:bold;
+}
+
+.smallbtn{
+padding:10px 13px;
+border:1px solid var(--border);
+border-radius:9px;
+background:var(--panel2);
+color:white;
+}
+
 .fav{color:#ffd34f}
-.empty{text-align:center;padding:45px;color:var(--muted);grid-column:1/-1}
-.footer{text-align:center;color:#687995;font-size:11px;margin:30px 0}
-.addbtn{background:linear-gradient(100deg,#2469ee,#7b2ddd)!important;color:white!important}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:15px}
+
+.empty{
+grid-column:1/-1;
+padding:50px 15px;
+text-align:center;
+color:var(--muted);
+}
+
+.footer{
+text-align:center;
+color:#73839e;
+font-size:12px;
+margin:35px 0 10px;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+z-index:20;
+background:#000b;
+padding:16px;
+align-items:center;
+justify-content:center;
+}
+
 .modal.show{display:flex}
-.modalbox{background:#111b2e;border:1px solid var(--border);width:100%;max-width:430px;border-radius:16px;padding:22px}
-.modalbox h2{margin-bottom:18px}
-.modalbox label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}
-.modalbox input,.modalbox select{width:100%;padding:12px;background:#0a1325;color:white;border:1px solid var(--border);border-radius:9px}
-.modalactions{display:flex;gap:10px;margin-top:18px}
-.modalactions button{flex:1;padding:12px;border-radius:9px;border:0;cursor:pointer}
-.save{background:linear-gradient(100deg,#2563eb,#7b2ddd);color:white}
-.cancel{background:#26344e;color:white}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.modalbox{
+background:var(--panel);
+border:1px solid var(--border);
+width:100%;
+max-width:440px;
+max-height:90vh;
+overflow-y:auto;
+border-radius:18px;
+padding:23px;
+}
+
+.modalbox h2{margin-bottom:20px}
+
+.modalbox label{
+display:block;
+font-size:13px;
+color:var(--muted);
+margin:13px 0 7px;
+}
+
+.modalbox input,.modalbox select{
+width:100%;
+padding:13px;
+border:1px solid var(--border);
+border-radius:10px;
+background:#091326;
+color:white;
+}
+
+.modalactions{
+display:flex;
+gap:10px;
+margin-top:20px;
+}
+
+.modalactions button{
+flex:1;
+padding:13px 8px;
+border:0;
+border-radius:9px;
+}
+
+.save{
+background:linear-gradient(100deg,#2869f0,#802de5);
+color:white;
+}
+
+.cancel{
+background:var(--panel2);
+color:white;
+}
+
+.settings-card{
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:14px;
+padding:22px;
+}
+
+@media(max-width:950px){
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* MOBILE DESIGN */
 @media(max-width:600px){
+
+.app{
+display:block;
+min-height:100vh;
+}
+
 .sidebar{
 position:static;
 width:100%;
-padding:14px;
+padding:15px;
 border-right:0;
 border-bottom:1px solid var(--border);
 }
-.brand{font-size:19px}
-.sub{font-size:11px;margin-bottom:12px}
+
+.brand{
+font-size:20px;
+margin-bottom:4px;
+}
+
+.sub{
+font-size:11px;
+margin-bottom:13px;
+}
+
 .nav{
 display:flex;
 flex-wrap:wrap;
-gap:6px;
+gap:7px;
 }
+
 .nav button{
 width:auto;
+padding:10px 12px;
+font-size:12px;
+border-radius:9px;
+}
+
+.main{
+width:100%;
+max-width:none;
 margin:0;
-padding:9px 11px;
+padding:15px;
+}
+
+.top{
+display:flex;
+flex-direction:column;
+align-items:stretch;
+gap:12px;
+margin-bottom:17px;
+}
+
+.top h1{font-size:22px}
+
+.search{
+width:100%;
+padding:13px;
+}
+
+.hero{
+padding:19px;
+margin-bottom:19px;
+border-radius:15px;
+}
+
+.hero h2{
+font-size:19px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:13px;
+}
+
+.section-title{
+font-size:16px;
+margin:18px 0 12px;
+}
+
+.categories{gap:7px}
+
+.categories button{
+padding:9px 12px;
 font-size:12px;
 }
-.main{
-margin-left:0;
-padding:14px;
-max-width:none;
-}
-.top{display:block}
-.top h1{
-font-size:21px;
-margin-bottom:12px;
-}
-.search{width:100%}
-.hero{padding:18px}
-.hero h2{font-size:18px}
-.hero p{font-size:12px}
+
 .grid{
 grid-template-columns:repeat(2,minmax(0,1fr));
 gap:10px;
 }
-.card{padding:12px}
-.logo{font-size:28px}
+
+.card{
+padding:13px 9px;
+border-radius:13px;
+}
+
+.logo{
+font-size:30px;
+margin:6px 0 10px;
+}
+
 .card h3{font-size:14px}
-.card p{font-size:11px}
-.actions{gap:6px}
-.visit{padding:9px 5px;font-size:11px}
-.smallbtn{padding:8px}
-.categories button{
-padding:8px 10px;
+
+.card p{
+font-size:10px;
+margin-bottom:12px;
+}
+
+.actions{gap:5px}
+
+.visit{
+padding:10px 3px;
 font-size:11px;
 }
+
+.smallbtn{
+padding:8px 10px;
+}
+
+.footer{
+font-size:10px;
+margin:25px 0;
+}
+}
+
+@media(max-width:360px){
+.grid{grid-template-columns:1fr}
+.nav button{padding:9px;font-size:11px}
 }
 </style>
 </head>
+
 <body>
 
+<div class="app">
+
 <aside class="sidebar">
-  <div class="brand">🌐 WebTools BD</div>
-  <div class="sub">Smart Links, Smart Life</div>
-  <nav class="nav">
-    <button class="active" onclick="showPage('home',this)">⌂ Home</button>
-    <button onclick="showPage('websites',this)">▣ Websites</button>
-    <button onclick="showPage('categories',this)">☷ Categories</button>
-    <button onclick="showPage('favorites',this)">★ Favorites</button>
-    <button onclick="openModal()" class="addbtn">＋ Add Website</button>
-    <button onclick="showPage('settings',this)">⚙ Settings</button>
-  </nav>
+<div class="brand">🌐 WebTools BD</div>
+<div class="sub">Smart Links, Smart Life</div>
+
+<nav class="nav">
+<button class="active" data-page="home">⌂ Home</button>
+<button data-page="websites">▣ Websites</button>
+<button data-page="categories">☷ Categories</button>
+<button data-page="favorites">★ Favorites</button>
+<button class="addbtn" id="addBtn">＋ Add Website</button>
+<button data-page="settings">⚙ Settings</button>
+</nav>
 </aside>
 
 <main class="main">
-  <div class="top">
-    <h1 id="pageTitle">Dashboard</h1>
-    <input class="search" id="search" placeholder="🔍 Search websites..." oninput="render()">
-  </div>
 
-  <section class="hero">
-    <h2>Find & Visit Your Favorite Sites</h2>
-    <p>All your useful websites in one place. Fast, simple and free.</p>
-  </section>
+<div class="top">
+<h1 id="pageTitle">Dashboard</h1>
+<input class="search" id="search"
+placeholder="🔍 Search websites...">
+</div>
 
-  <div class="categories" id="categories"></div>
-  <section class="grid" id="websites"></section>
-  <div class="footer">© 2026 WebTools BD · All Rights Reserved</div>
+<section class="hero">
+<h2>Find & Visit Your Favorite Sites</h2>
+<p>All your useful websites in one place. Fast, simple and free.</p>
+</section>
+
+<h3 class="section-title" id="sectionTitle">Explore Websites</h3>
+
+<div class="categories" id="categories"></div>
+
+<section class="grid" id="websites"></section>
+
+<div class="footer">
+© 2026 WebTools BD · All Rights Reserved
+</div>
+
 </main>
+</div>
 
 <div class="modal" id="modal">
-  <div class="modalbox">
-    <h2>＋ Add New Website</h2>
-    <form id="siteForm">
-      <label>Website Name</label>
-      <input id="siteName" placeholder="e.g. Canva" required>
-      <label>Website URL</label>
-      <input id="siteUrl" placeholder="https://example.com" required>
-      <label>Category</label>
-      <select id="siteCategory">
-        <option>Tools</option>
-        <option>Social</option>
-        <option>Education</option>
-        <option>Entertainment</option>
-        <option>Other</option>
-      </select>
-      <label>Emoji Icon</label>
-      <input id="siteIcon" value="🌐" maxlength="8">
-      <div class="modalactions">
-        <button type="button" class="cancel" onclick="closeModal()">Cancel</button>
-        <button type="submit" class="save">Save Website</button>
-      </div>
-    </form>
-  </div>
+<div class="modalbox">
+<h2>＋ Add New Website</h2>
+
+<form id="siteForm">
+
+<label>Website Name</label>
+<input id="siteName" placeholder="e.g. Canva" required>
+
+<label>Website URL</label>
+<input id="siteUrl" placeholder="https://example.com" required>
+
+<label>Category</label>
+<select id="siteCategory">
+<option>Tools</option>
+<option>Social</option>
+<option>Education</option>
+<option>Entertainment</option>
+<option>Other</option>
+</select>
+
+<label>Emoji Icon</label>
+<input id="siteIcon" value="🌐" maxlength="8">
+
+<div class="modalactions">
+<button type="button" class="cancel" id="cancelBtn">Cancel</button>
+<button type="submit" class="save">Save Website</button>
+</div>
+
+</form>
+</div>
 </div>
 
 <script>
@@ -169,63 +532,258 @@ const defaultSites=[
 {name:"Wikipedia",url:"https://wikipedia.org",cat:"Education",icon:"📚",desc:"Online Knowledge"},
 {name:"Spotify",url:"https://spotify.com",cat:"Entertainment",icon:"🎵",desc:"Music"}
 ];
-let sites=JSON.parse(localStorage.getItem("webtools_sites")||"null")||defaultSites;
-let favorites=JSON.parse(localStorage.getItem("webtools_favs")||"[]");
-let currentCategory="All",page="home";
-function persist(){localStorage.setItem("webtools_sites",JSON.stringify(sites));localStorage.setItem("webtools_favs",JSON.stringify(favorites))}
-function showPage(p,btn){
- page=p;currentCategory="All";
- document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
- if(btn)btn.classList.add("active");
- document.getElementById("pageTitle").textContent=({home:"Dashboard",websites:"All Websites",categories:"Categories",favorites:"Favorites",settings:"Settings"})[p]||"Dashboard";
- render();
+
+function load(key,fallback){
+try{
+const value=JSON.parse(localStorage.getItem(key));
+return value===null?fallback:value;
+}catch(e){return fallback}
 }
+
+let sites=load("webtools_sites",defaultSites);
+let favorites=load("webtools_favs",[]);
+let currentCategory="All";
+let page="home";
+
+const $=id=>document.getElementById(id);
+
+function persist(){
+localStorage.setItem("webtools_sites",JSON.stringify(sites));
+localStorage.setItem("webtools_favs",JSON.stringify(favorites));
+}
+
+function safeURL(value){
+try{
+const u=new URL(value);
+return ["http:","https:"].includes(u.protocol)?u.href:null;
+}catch(e){return null}
+}
+
+function makeButton(text,callback,className=""){
+const b=document.createElement("button");
+b.textContent=text;
+b.className=className;
+b.addEventListener("click",callback);
+return b;
+}
+
 function renderCategories(){
- let cats=["All","Social","Tools","Education","Entertainment","Other"];
- let box=document.getElementById("categories");
- box.innerHTML=cats.map(c=>`<button class="${currentCategory===c?"active":""}" onclick="setCat('${c}')">${c}</button>`).join("");
-}
-function setCat(c){currentCategory=c;render()}
-function render(){
- renderCategories();
- let q=document.getElementById("search").value.toLowerCase();
- let list=sites.filter(s=>(page!=="favorites"||favorites.includes(s.url))&&(currentCategory==="All"||s.cat===currentCategory)&&(s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q)));
- if(page==="categories"){
- list=sites.filter(s=>s.cat===currentCategory||currentCategory==="All");
- }
- if(page==="settings"){
- document.getElementById("websites").innerHTML=`<div class="card" style="grid-column:1/-1;text-align:left"><h3>⚙ Settings</h3><p style="margin:15px 0">Your custom websites and favorites are saved in this browser.</p><button class="smallbtn" onclick="resetSites()">Reset website list</button></div>`;
- return;
- }
- document.getElementById("websites").innerHTML=list.length?list.map(s=>`
- <div class="card">
- <div class="logo">${s.icon||"🌐"}</div>
- <h3>${escapeHTML(s.name)}</h3>
- <p>${escapeHTML(s.desc||s.cat)}</p>
- <div class="actions">
- <a class="visit" href="${safeURL(s.url)}" target="_blank" rel="noopener">Visit ↗</a>
- <button class="smallbtn ${favorites.includes(s.url)?"fav":""}" onclick="toggleFav('${encodeURIComponent(s.url)}')" title="Favorite">★</button>
- ${s.custom?`<button class="smallbtn" onclick="deleteSite('${encodeURIComponent(s.url)}')" title="Delete">✕</button>`:""}
- </div>
- </div>`).join(""):`<div class="empty">No websites found 😕</div>`;
-}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function safeURL(u){try{let x=new URL(u);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return "#"}}
-function toggleFav(encoded){let url=decodeURIComponent(encoded);favorites.includes(url)?favorites=favorites.filter(x=>x!==url):favorites.push(url);persist();render()}
-function deleteSite(encoded){let url=decodeURIComponent(encoded);if(confirm("Delete this website?")){sites=sites.filter(s=>s.url!==url);favorites=favorites.filter(f=>f!==url);persist();render()}}
-function openModal(){document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-document.getElementById("siteForm").addEventListener("submit",e=>{
- e.preventDefault();
- let name=document.getElementById("siteName").value.trim();
- let url=document.getElementById("siteUrl").value.trim();
- if(!/^https?:\/\//i.test(url))url="https://"+url;
- if(!safeURL(url)||safeURL(url)==="#"){alert("Please enter a valid website URL");return}
- sites.push({name,url,cat:document.getElementById("siteCategory").value,icon:document.getElementById("siteIcon").value||"🌐",desc:"Added by you",custom:true});
- persist();e.target.reset();document.getElementById("siteIcon").value="🌐";closeModal();showPage("websites");document.getElementById("search").value="";
+const box=$("categories");
+box.replaceChildren();
+
+const cats=["All","Social","Tools","Education","Entertainment","Other"];
+
+cats.forEach(cat=>{
+const b=makeButton(cat,()=>{
+currentCategory=cat;
+render();
+},currentCategory===cat?"active":"");
+box.appendChild(b);
 });
-function resetSites(){if(confirm("Reset all websites and favorites?")){sites=defaultSites;favorites=[];persist();render()}}
+
+box.style.display=page==="settings"?"none":"flex";
+}
+
+function showPage(newPage){
+page=newPage;
+currentCategory="All";
+
+const titles={
+home:"Dashboard",
+websites:"All Websites",
+categories:"Categories",
+favorites:"My Favorites",
+settings:"Settings"
+};
+
+$("pageTitle").textContent=titles[page]||"Dashboard";
+$("sectionTitle").textContent=
+page==="favorites"?"Favorite Websites":
+page==="categories"?"Browse Categories":"Explore Websites";
+
+document.querySelectorAll(".nav [data-page]").forEach(btn=>{
+btn.classList.toggle("active",btn.dataset.page===page);
+});
+
+render();
+}
+
+function render(){
+renderCategories();
+
+const q=$("search").value.trim().toLowerCase();
+
+if(page==="settings"){
+const box=document.createElement("div");
+box.className="settings-card";
+
+const title=document.createElement("h3");
+title.textContent="⚙ Dashboard Settings";
+
+const info=document.createElement("p");
+info.textContent="Your custom websites and favorites are saved in this browser.";
+info.style.cssText="color:var(--muted);margin:15px 0;line-height:1.6";
+
+const reset=makeButton("Reset Website List",resetSites,"smallbtn");
+
+box.append(title,info,reset);
+$("websites").replaceChildren(box);
+return;
+}
+
+let list=sites.filter(s=>{
+const categoryMatch=currentCategory==="All"||s.cat===currentCategory;
+const favoriteMatch=page!=="favorites"||favorites.includes(s.url);
+const searchMatch=(s.name+" "+s.cat+" "+(s.desc||"")).toLowerCase().includes(q);
+return categoryMatch&&favoriteMatch&&searchMatch;
+});
+
+if(page==="categories"&&!q){
+list=sites.filter(s=>currentCategory==="All"||s.cat===currentCategory);
+}
+
+const container=$("websites");
+container.replaceChildren();
+
+if(!list.length){
+const empty=document.createElement("div");
+empty.className="empty";
+empty.textContent="No websites found 😕";
+container.appendChild(empty);
+return;
+}
+
+list.forEach(site=>{
+const card=document.createElement("article");
+card.className="card";
+
+const logo=document.createElement("div");
+logo.className="logo";
+logo.textContent=site.icon||"🌐";
+
+const name=document.createElement("h3");
+name.textContent=site.name;
+
+const desc=document.createElement("p");
+desc.textContent=site.desc||site.cat;
+
+const actions=document.createElement("div");
+actions.className="actions";
+
+const url=safeURL(site.url);
+
+const visit=document.createElement("a");
+visit.className="visit";
+visit.textContent="Visit ↗";
+visit.href=url||"#";
+visit.target="_blank";
+visit.rel="noopener noreferrer";
+
+if(!url){
+visit.addEventListener("click",e=>e.preventDefault());
+}
+
+const fav=makeButton(
+favorites.includes(site.url)?"★":"☆",
+()=>{
+if(favorites.includes(site.url)){
+favorites=favorites.filter(x=>x!==site.url);
+}else{
+favorites.push(site.url);
+}
+persist();
+render();
+},
+"smallbtn "+(favorites.includes(site.url)?"fav":"")
+);
+
+actions.append(visit,fav);
+
+if(site.custom){
+const del=makeButton("✕",()=>{
+if(confirm("Delete this website?")){
+sites=sites.filter(s=>s.url!==site.url);
+favorites=favorites.filter(x=>x!==site.url);
+persist();
+render();
+}
+},"smallbtn");
+actions.appendChild(del);
+}
+
+card.append(logo,name,desc,actions);
+container.appendChild(card);
+});
+}
+
+function openModal(){
+$("modal").classList.add("show");
+}
+
+function closeModal(){
+$("modal").classList.remove("show");
+}
+
+function resetSites(){
+if(confirm("Reset all websites and favorites?")){
+sites=defaultSites.map(s=>({...s}));
+favorites=[];
+persist();
+render();
+}
+}
+
+document.querySelectorAll(".nav [data-page]").forEach(btn=>{
+btn.addEventListener("click",()=>showPage(btn.dataset.page));
+});
+
+$("addBtn").addEventListener("click",openModal);
+$("cancelBtn").addEventListener("click",closeModal);
+$("search").addEventListener("input",render);
+
+$("modal").addEventListener("click",e=>{
+if(e.target===$("modal"))closeModal();
+});
+
+$("siteForm").addEventListener("submit",e=>{
+e.preventDefault();
+
+const name=$("siteName").value.trim();
+let url=$("siteUrl").value.trim();
+
+if(!/^https?:\/\//i.test(url)){
+url="https://"+url;
+}
+
+if(!name||!safeURL(url)){
+alert("Please enter a valid website name and URL.");
+return;
+}
+
+if(sites.some(s=>s.url===url)){
+alert("This website already exists.");
+return;
+}
+
+sites.push({
+name,
+url,
+cat:$("siteCategory").value,
+icon:$("siteIcon").value.trim()||"🌐",
+desc:"Added by you",
+custom:true
+});
+
+persist();
+e.target.reset();
+$("siteIcon").value="🌐";
+$("search").value="";
+closeModal();
+showPage("websites");
+});
+
 render();
 </script>
+
 </body>
 </html>
