@@ -1,4 +1,3 @@
-here 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,96 +6,186 @@ here
 <title>WebTools BD</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#080d1b;color:#eaf2ff;font-family:Arial,sans-serif}
-.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:#0c1426;border-right:1px solid #1c2941;padding:22px 14px}
-.brand{font-size:23px;font-weight:800;color:#46b7ff;margin:8px 0 5px}
-.sub{font-size:12px;color:#8494b5;margin-bottom:28px}
-.nav a{display:block;text-decoration:none;color:#aab8d2;padding:13px;border-radius:10px;margin:5px 0}
-.nav a.active,.nav a:hover{background:linear-gradient(90deg,#1465db,#6725dc);color:white}
-.main{margin-left:235px;padding:25px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
-.top h1{font-size:24px}
-.search{width:100%;max-width:400px;background:#111b2e;border:1px solid #263753;border-radius:12px;padding:13px;color:white}
-.hero{background:linear-gradient(120deg,#103c88,#152650,#5521a8);border:1px solid #314b91;border-radius:18px;padding:25px;margin-bottom:22px}
-.hero h2{font-size:25px;margin-bottom:10px}
-.hero p{color:#c6d7ff}
-.categories{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
-.categories button{background:#121e34;color:#b9c8e2;border:1px solid #263b5c;padding:10px 15px;border-radius:20px;cursor:pointer}
-.categories button.active{background:#255ee9;color:#fff}
+:root{--bg:#070e1c;--panel:#111b2e;--panel2:#17233a;--border:#26344e;--text:#eef4ff;--muted:#91a1bd;--blue:#3478ff;--purple:#792bdf}
+body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:225px;background:#0c1426;border-right:1px solid var(--border);padding:22px 15px;z-index:5}
+.brand{font-size:20px;font-weight:bold;color:#55b7ff;margin-bottom:5px}
+.sub{font-size:11px;color:var(--muted);margin-bottom:25px}
+.nav button{width:100%;text-align:left;border:0;background:transparent;color:#aab9d2;padding:12px;border-radius:9px;margin:3px 0;cursor:pointer}
+.nav button.active,.nav button:hover{background:linear-gradient(100deg,#2563eb,#792bdf);color:white}
+.main{margin-left:225px;padding:25px;max-width:1500px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
+.top h1{font-size:23px}
+.search{width: min(360px,100%);padding:12px 14px;border:1px solid var(--border);background:var(--panel);border-radius:11px;color:white;outline:none}
+.hero{padding:23px;border-radius:17px;background:linear-gradient(110deg,#103c85,#46218c);margin-bottom:20px}
+.hero h2{font-size:21px;margin-bottom:8px}
+.hero p{color:#d5e2ff;font-size:14px}
+.categories{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.categories button{background:var(--panel);color:var(--muted);border:1px solid var(--border);padding:9px 14px;border-radius:22px;cursor:pointer}
+.categories button.active{background:#2866e9;color:white;border-color:#2866e9}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{background:#101a2c;border:1px solid #20324e;border-radius:15px;padding:16px;text-align:center;transition:.2s}
-.card:hover{transform:translateY(-3px);border-color:#3c86ff;box-shadow:0 0 20px #1675ff22}
-.logo{height:65px;display:grid;place-items:center;font-size:35px;margin-bottom:10px}
-.card h3{margin-bottom:6px}
-.card p{font-size:12px;color:#8799b9;margin-bottom:14px}
-.visit{display:block;text-decoration:none;color:white;background:linear-gradient(90deg,#2365ed,#7b2be6);padding:10px;border-radius:9px;font-weight:bold}
-.footer{text-align:center;color:#687b9e;padding:30px 0;font-size:12px}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar{width:190px}.main{margin-left:190px;padding:16px}}
-@media(max-width:560px){.sidebar{position:static;width:auto;height:auto;padding:13px;border:0}.brand{margin:0}.sub{margin:3px 0 10px}.nav{display:flex;overflow:auto;gap:4px}.nav a{white-space:nowrap;padding:9px 11px;margin:0;font-size:12px}.main{margin:0;padding:14px}.top{display:block}.top h1{margin-bottom:12px}.search{max-width:none}.hero{padding:20px}.hero h2{font-size:22px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:12px}.logo{height:52px;font-size:30px}}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:17px;text-align:center;transition:.2s;min-width:0}
+.card:hover{transform:translateY(-3px);border-color:#5578ff}
+.logo{font-size:35px;margin:8px 0 12px}
+.card h3{font-size:15px;margin-bottom:5px;word-break:break-word}
+.card p{font-size:11px;color:var(--muted);margin-bottom:14px}
+.actions{display:flex;gap:8px}
+.visit{display:block;flex:1;background:linear-gradient(100deg,#2869ee,#8429df);color:white;text-decoration:none;border:0;padding:10px;border-radius:9px;font-weight:bold;font-size:12px}
+.smallbtn{border:1px solid var(--border);background:var(--panel2);color:white;padding:9px;border-radius:8px;cursor:pointer}
+.fav{color:#ffd34f}
+.empty{text-align:center;padding:45px;color:var(--muted);grid-column:1/-1}
+.footer{text-align:center;color:#687995;font-size:11px;margin:30px 0}
+.addbtn{background:linear-gradient(100deg,#2469ee,#7b2ddd)!important;color:white!important}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:15px}
+.modal.show{display:flex}
+.modalbox{background:#111b2e;border:1px solid var(--border);width:100%;max-width:430px;border-radius:16px;padding:22px}
+.modalbox h2{margin-bottom:18px}
+.modalbox label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}
+.modalbox input,.modalbox select{width:100%;padding:12px;background:#0a1325;color:white;border:1px solid var(--border);border-radius:9px}
+.modalactions{display:flex;gap:10px;margin-top:18px}
+.modalactions button{flex:1;padding:12px;border-radius:9px;border:0;cursor:pointer}
+.save{background:linear-gradient(100deg,#2563eb,#7b2ddd);color:white}
+.cancel{background:#26344e;color:white}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+.sidebar{width:145px;padding:15px 9px}
+.brand{font-size:16px}.sub{font-size:9px}
+.nav button{font-size:12px;padding:10px 7px}
+.main{margin-left:145px;padding:13px}
+.top{display:block}.top h1{font-size:19px;margin-bottom:12px}
+.search{width:100%}.hero{padding:16px}.hero h2{font-size:17px}.hero p{font-size:12px}
+.grid{grid-template-columns:1fr;gap:10px}
+.card{padding:13px}.logo{font-size:30px}
+.categories button{padding:8px 10px;font-size:11px}
+}
 </style>
 </head>
 <body>
+
 <aside class="sidebar">
-<div class="brand">🌐 WebTools BD</div>
-<div class="sub">Smart Links, Smart Life</div>
-<nav class="nav">
-<a class="active" href="#">⌂ Home</a>
-<a href="#websites">▦ Websites</a>
-<a href="#categories">☷ Categories</a>
-<a href="#">★ Favorites</a>
-<a href="#">＋ Add Website</a>
-<a href="#">⚙ Settings</a>
-</nav>
+  <div class="brand">🌐 WebTools BD</div>
+  <div class="sub">Smart Links, Smart Life</div>
+  <nav class="nav">
+    <button class="active" onclick="showPage('home',this)">⌂ Home</button>
+    <button onclick="showPage('websites',this)">▣ Websites</button>
+    <button onclick="showPage('categories',this)">☷ Categories</button>
+    <button onclick="showPage('favorites',this)">★ Favorites</button>
+    <button onclick="openModal()" class="addbtn">＋ Add Website</button>
+    <button onclick="showPage('settings',this)">⚙ Settings</button>
+  </nav>
 </aside>
 
 <main class="main">
-<div class="top">
-<h1>Dashboard</h1>
-<input class="search" id="search" placeholder="🔍 Search websites..." oninput="filterSites()">
-</div>
+  <div class="top">
+    <h1 id="pageTitle">Dashboard</h1>
+    <input class="search" id="search" placeholder="🔍 Search websites..." oninput="render()">
+  </div>
 
-<section class="hero">
-<h2>Find & Visit Your Favorite Sites</h2>
-<p>All your useful websites in one place. Fast, simple and free.</p>
-</section>
+  <section class="hero">
+    <h2>Find & Visit Your Favorite Sites</h2>
+    <p>All your useful websites in one place. Fast, simple and free.</p>
+  </section>
 
-<div class="categories" id="categories">
-<button class="active" onclick="category('All',this)">All</button>
-<button onclick="category('Social',this)">Social</button>
-<button onclick="category('Tools',this)">Tools</button>
-<button onclick="category('Education',this)">Education</button>
-<button onclick="category('Entertainment',this)">Entertainment</button>
-</div>
-
-<section class="grid" id="websites">
-<div class="card" data-category="Tools"><div class="logo">🔎</div><h3>Google</h3><p>Search Engine</p><a class="visit" href="https://google.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Entertainment"><div class="logo">▶️</div><h3>YouTube</h3><p>Videos</p><a class="visit" href="https://youtube.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Social"><div class="logo">📘</div><h3>Facebook</h3><p>Social Media</p><a class="visit" href="https://facebook.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Social"><div class="logo">📷</div><h3>Instagram</h3><p>Photo & Social</p><a class="visit" href="https://instagram.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Tools"><div class="logo">🤖</div><h3>ChatGPT</h3><p>AI Assistant</p><a class="visit" href="https://chatgpt.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Social"><div class="logo">✈️</div><h3>Telegram</h3><p>Messaging</p><a class="visit" href="https://telegram.org" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Tools"><div class="logo">🎨</div><h3>Canva</h3><p>Design Tool</p><a class="visit" href="https://canva.com" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Education"><div class="logo">📚</div><h3>Wikipedia</h3><p>Online Knowledge</p><a class="visit" href="https://wikipedia.org" target="_blank">Visit ↗</a></div>
-<div class="card" data-category="Entertainment"><div class="logo">🎵</div><h3>Spotify</h3><p>Music</p><a class="visit" href="https://spotify.com" target="_blank">Visit ↗</a></div>
-</section>
-
-<div class="footer">© 2026 WebTools BD · All Rights Reserved</div>
+  <div class="categories" id="categories"></div>
+  <section class="grid" id="websites"></section>
+  <div class="footer">© 2026 WebTools BD · All Rights Reserved</div>
 </main>
 
+<div class="modal" id="modal">
+  <div class="modalbox">
+    <h2>＋ Add New Website</h2>
+    <form id="siteForm">
+      <label>Website Name</label>
+      <input id="siteName" placeholder="e.g. Canva" required>
+      <label>Website URL</label>
+      <input id="siteUrl" placeholder="https://example.com" required>
+      <label>Category</label>
+      <select id="siteCategory">
+        <option>Tools</option>
+        <option>Social</option>
+        <option>Education</option>
+        <option>Entertainment</option>
+        <option>Other</option>
+      </select>
+      <label>Emoji Icon</label>
+      <input id="siteIcon" value="🌐" maxlength="8">
+      <div class="modalactions">
+        <button type="button" class="cancel" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="save">Save Website</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
-let selected="All";
-function filterSites(){
- const q=document.getElementById("search").value.toLowerCase();
- document.querySelectorAll(".card").forEach(c=>{
- c.style.display=(c.innerText.toLowerCase().includes(q)&&(selected==="All"||c.dataset.category===selected))?"":"none";
- });
+const defaultSites=[
+{name:"Google",url:"https://google.com",cat:"Tools",icon:"🔎",desc:"Search Engine"},
+{name:"YouTube",url:"https://youtube.com",cat:"Entertainment",icon:"▶️",desc:"Videos"},
+{name:"Facebook",url:"https://facebook.com",cat:"Social",icon:"📘",desc:"Social Media"},
+{name:"Instagram",url:"https://instagram.com",cat:"Social",icon:"📸",desc:"Photo & Social"},
+{name:"ChatGPT",url:"https://chatgpt.com",cat:"Tools",icon:"🤖",desc:"AI Assistant"},
+{name:"Telegram",url:"https://telegram.org",cat:"Social",icon:"✈️",desc:"Messaging"},
+{name:"Canva",url:"https://canva.com",cat:"Tools",icon:"🎨",desc:"Design Tool"},
+{name:"Wikipedia",url:"https://wikipedia.org",cat:"Education",icon:"📚",desc:"Online Knowledge"},
+{name:"Spotify",url:"https://spotify.com",cat:"Entertainment",icon:"🎵",desc:"Music"}
+];
+let sites=JSON.parse(localStorage.getItem("webtools_sites")||"null")||defaultSites;
+let favorites=JSON.parse(localStorage.getItem("webtools_favs")||"[]");
+let currentCategory="All",page="home";
+function persist(){localStorage.setItem("webtools_sites",JSON.stringify(sites));localStorage.setItem("webtools_favs",JSON.stringify(favorites))}
+function showPage(p,btn){
+ page=p;currentCategory="All";
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ document.getElementById("pageTitle").textContent=({home:"Dashboard",websites:"All Websites",categories:"Categories",favorites:"Favorites",settings:"Settings"})[p]||"Dashboard";
+ render();
 }
-function category(cat,btn){
- selected=cat;
- document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
- btn.classList.add("active");
- filterSites();
+function renderCategories(){
+ let cats=["All","Social","Tools","Education","Entertainment","Other"];
+ let box=document.getElementById("categories");
+ box.innerHTML=cats.map(c=>`<button class="${currentCategory===c?"active":""}" onclick="setCat('${c}')">${c}</button>`).join("");
 }
+function setCat(c){currentCategory=c;render()}
+function render(){
+ renderCategories();
+ let q=document.getElementById("search").value.toLowerCase();
+ let list=sites.filter(s=>(page!=="favorites"||favorites.includes(s.url))&&(currentCategory==="All"||s.cat===currentCategory)&&(s.name.toLowerCase().includes(q)||s.cat.toLowerCase().includes(q)));
+ if(page==="categories"){
+ list=sites.filter(s=>s.cat===currentCategory||currentCategory==="All");
+ }
+ if(page==="settings"){
+ document.getElementById("websites").innerHTML=`<div class="card" style="grid-column:1/-1;text-align:left"><h3>⚙ Settings</h3><p style="margin:15px 0">Your custom websites and favorites are saved in this browser.</p><button class="smallbtn" onclick="resetSites()">Reset website list</button></div>`;
+ return;
+ }
+ document.getElementById("websites").innerHTML=list.length?list.map(s=>`
+ <div class="card">
+ <div class="logo">${s.icon||"🌐"}</div>
+ <h3>${escapeHTML(s.name)}</h3>
+ <p>${escapeHTML(s.desc||s.cat)}</p>
+ <div class="actions">
+ <a class="visit" href="${safeURL(s.url)}" target="_blank" rel="noopener">Visit ↗</a>
+ <button class="smallbtn ${favorites.includes(s.url)?"fav":""}" onclick="toggleFav('${encodeURIComponent(s.url)}')" title="Favorite">★</button>
+ ${s.custom?`<button class="smallbtn" onclick="deleteSite('${encodeURIComponent(s.url)}')" title="Delete">✕</button>`:""}
+ </div>
+ </div>`).join(""):`<div class="empty">No websites found 😕</div>`;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function safeURL(u){try{let x=new URL(u);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return "#"}}
+function toggleFav(encoded){let url=decodeURIComponent(encoded);favorites.includes(url)?favorites=favorites.filter(x=>x!==url):favorites.push(url);persist();render()}
+function deleteSite(encoded){let url=decodeURIComponent(encoded);if(confirm("Delete this website?")){sites=sites.filter(s=>s.url!==url);favorites=favorites.filter(f=>f!==url);persist();render()}}
+function openModal(){document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("siteForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ let name=document.getElementById("siteName").value.trim();
+ let url=document.getElementById("siteUrl").value.trim();
+ if(!/^https?:\/\//i.test(url))url="https://"+url;
+ if(!safeURL(url)||safeURL(url)==="#"){alert("Please enter a valid website URL");return}
+ sites.push({name,url,cat:document.getElementById("siteCategory").value,icon:document.getElementById("siteIcon").value||"🌐",desc:"Added by you",custom:true});
+ persist();e.target.reset();document.getElementById("siteIcon").value="🌐";closeModal();showPage("websites");document.getElementById("search").value="";
+});
+function resetSites(){if(confirm("Reset all websites and favorites?")){sites=defaultSites;favorites=[];persist();render()}}
+render();
 </script>
 </body>
 </html>
